@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_systeminit.c
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements system initializing function.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -34,8 +34,9 @@ Includes
 #include "r_cg_port.h"
 #include "r_cg_serial.h"
 #include "r_cg_adc.h"
-#include "r_cg_wdt.h"
+#include "r_cg_timer.h"
 #include "r_cg_it.h"
+#include "r_cg_elc.h"
 /* Start user code for include. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
 #include "r_cg_userdefine.h"
@@ -67,8 +68,9 @@ void R_Systeminit(void)
     R_PORT_Create();
     R_SAU0_Create();
     R_ADC_Create();
-    R_WDT_Create();
+    R_TAU0_Create();
     R_IT_Create();
+    R_ELC_Create();
     IAWCTL = 0x00U;
 }
 

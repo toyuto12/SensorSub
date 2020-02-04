@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_macrodriver.h
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements general head file.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 #ifndef STATUS_H

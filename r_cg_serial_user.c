@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_serial_user.c
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements device driver for Serial module.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -66,6 +66,7 @@ static void __near r_uart0_interrupt_receive(void)
 	volatile uint8_t err_type;
 	static uint8_t Pos,Sum,Err;
 	static uint8_t RxBuf[20];
+	static uint8_t exRxData=0;
     
     err_type = (uint8_t)(SSR01 & 0x0007U);
     SIR01 = (uint16_t)err_type;
@@ -76,7 +77,7 @@ static void __near r_uart0_interrupt_receive(void)
 	if( Pos == 18 ){					// CheckSum
 		if( rx_data != Sum ) Err = 1;
 		Pos ++;
-	}else if( rx_data == 0xFF ){		// Start1/2
+	}else if( (exRxData==0xFF) && (rx_data==0xFF) ){		// Start1/2
 		Pos = 0;	Sum = 0;	Err = 0;
 	}else if( Pos == 19 ){				// End
 		if( (RxBuf[1]!=0x0B) && (RxBuf[1]!=0x01) ) Err = 1;		
@@ -93,6 +94,7 @@ static void __near r_uart0_interrupt_receive(void)
 		Sum += rx_data;
 		Pos ++;
 	}
+	exRxData = rx_data;
 }
 
 /***********************************************************************************************************************

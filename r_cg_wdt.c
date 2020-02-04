@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_wdt.c
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements device driver for WDT module.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/16
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -71,7 +71,16 @@ void R_WDT_Create(void)
 ***********************************************************************************************************************/
 void R_WDT_Restart(void)
 {
+    uint16_t w_count;
+    WDTIMK = 1U;    /* disable INTWDTI interrupt */
     WDTE = 0xACU;   /* restart watchdog timer */
+    /* Wait 80us */
+    for (w_count = 0U; w_count < _0101_WDT_80_MICRO_SEC_CYCLE; w_count++)
+    {
+        NOP();
+    }
+    WDTIIF = 0U;    /* clear INTWDTI interrupt flag */
+    WDTIMK = 0U;    /* enable INTWDTI interrupt */
 }
 
 /* Start user code for adding. Do not edit comment generated here */

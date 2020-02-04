@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_port.h
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements device driver for PORT module.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 #ifndef PORT_H

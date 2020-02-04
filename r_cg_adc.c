@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_adc.c
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements device driver for ADC module.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -69,11 +69,12 @@ void R_ADC_Create(void)
     PMC0 |= 0x01U;
     PM0 |= 0x01U;
     ADM0 = _00_AD_CONVERSION_CLOCK_64 | _00_AD_TIME_MODE_NORMAL_1 | _00_AD_OPERMODE_SELECT;
-    ADM1 = _00_AD_TRIGGER_SOFTWARE | _20_AD_CONVMODE_ONESELECT;
+    ADM1 = _C0_AD_TRIGGER_HARDWARE_WAIT | _20_AD_CONVMODE_ONESELECT | _01_AD_TRIGGER_ELC;
     ADM2 = _00_AD_POSITIVE_VDD | _00_AD_NEGATIVE_VSS | _00_AD_AREA_MODE_1 | _00_AD_RESOLUTION_10BIT;          
     ADUL = _FF_AD_ADUL_VALUE;
     ADLL = _00_AD_ADLL_VALUE;
     ADS = _00_AD_INPUT_CHANNEL_0;
+    ADCE = 1U;  /* enable AD comparator */
 }
 
 /***********************************************************************************************************************
@@ -84,7 +85,6 @@ void R_ADC_Create(void)
 ***********************************************************************************************************************/
 void R_ADC_Start(void)
 {
-    ADCS = 1U;  /* enable AD conversion */
 }
 
 /***********************************************************************************************************************

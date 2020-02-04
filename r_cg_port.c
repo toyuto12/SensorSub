@@ -20,10 +20,10 @@
 /***********************************************************************************************************************
 * File Name    : r_cg_port.c
 * Version      : CodeGenerator for RL78/G14 V2.05.03.02 [06 Nov 2018]
-* Device(s)    : R5F104BC
+* Device(s)    : R5F104BG
 * Tool-Chain   : CCRL
 * Description  : This file implements device driver for PORT module.
-* Creation Date: 2019/12/07
+* Creation Date: 2019/12/17
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -62,6 +62,7 @@ void R_PORT_Create(void)
     PU7 = _01_PUn0_PULLUP_ON;
     PU12 = _01_PUn0_PULLUP_ON;
     PU14 = _80_PUn7_PULLUP_ON;
+//    PMC1 = _04_PMCn2_NOT_USE | _08_PMCn3_NOT_USE | _00_PMCn6_DI_ON | _00_PMCn7_DI_ON;
     PM1 = _01_PMn0_NOT_USE | _02_PMn1_NOT_USE | _04_PMn2_NOT_USE | _08_PMn3_NOT_USE | _10_PMn4_MODE_INPUT |
           _20_PMn5_MODE_INPUT | _40_PMn6_MODE_INPUT | _80_PMn7_MODE_INPUT;
     PM3 = _00_PMn0_MODE_OUTPUT | _02_PMn1_NOT_USE | _FC_PM3_DEFAULT;
